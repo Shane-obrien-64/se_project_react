@@ -1,0 +1,19 @@
+.main {
+  padding: 0 20px;
+}
+
+.weather {
+  /* background-color: aqua; */
+  position: relative;
+}
+
+.weather__info {
+  position: absolute;
+  color: white;
+  font-size: 36px;
+}
+
+.weather__img {
+  width: 100%;
+  height: 100%;
+}
