@@ -11,6 +11,10 @@
   position: absolute;
   color: white;
   font-size: 36px;
+  /* font-family: Cabinet Grotesk;
+  font-weight: 700;
+  line-height: 40px;
+  text-align: left; */
 }
 
 .weather__img {
