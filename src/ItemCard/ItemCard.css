@@ -1,5 +1,5 @@
 .card__section {
-  margin: 40px auto 170px;
+  margin: 40px auto 0;
 }
 
 .card__items {
@@ -10,9 +10,17 @@
   justify-content: center;
 }
 
+.card__suggestion {
+  font-family: Cabinet Grotesk;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
 .card {
-  /* display: flex; */
-  /* position: relative; */
+  display: flex;
+  position: relative;
 }
 
 .card__image {
@@ -26,6 +34,12 @@
 
 .card__title {
   position: absolute;
+  /* top: 18px;
+  left: 120px; */
+  text-align: center;
   margin: 0;
-  padding: 0;
+  padding: 0 12px;
+  border: 1px solid #0000004d;
+  border-radius: 4px;
+  background-color: #fff;
 }

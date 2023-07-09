@@ -3,6 +3,7 @@
 import React from "react";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
+import Footer from "./Footer/Footer";
 import "./App.css";
 
 function App() {
@@ -10,10 +11,7 @@ function App() {
     <div>
       <Header />
       <Main />
-      <footer className="footer">
-        <div className="footer__item">Developed Shane O'Brien</div>
-        <div className="footer__item">2023</div>
-      </footer>
+      <Footer />
     </div>
   );
 }
