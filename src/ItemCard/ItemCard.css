@@ -34,12 +34,17 @@
 
 .card__title {
   position: absolute;
-  /* top: 18px;
-  left: 120px; */
+  top: 18px;
+  left: 50%;
+  transform: translate(-50%);
   text-align: center;
   margin: 0;
   padding: 0 12px;
   border: 1px solid #0000004d;
   border-radius: 4px;
   background-color: #fff;
+  font-family: Cabinet Grotesk;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
 }
