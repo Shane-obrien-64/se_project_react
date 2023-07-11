@@ -71,8 +71,6 @@ const WeatherCard = ({ isDay, type, weatherTemp }) => {
     return i.isDay === isDay && i.type === type;
   });
   const src = imageSrc[0].url;
-  console.log(src);
-  //   console.log(src);
 
   return (
     <section className="weather" id="weather">
