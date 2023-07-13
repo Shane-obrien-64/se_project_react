@@ -1,10 +1,13 @@
 .header {
-  /* background-color: aquamarine; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 60px;
   padding: 0 20px;
+  font-family: "Cabinet Grotesk Bold";
+  color: #000;
+  font-size: 20px;
+  line-height: normal;
 }
 
 .header__logo {
@@ -17,4 +20,19 @@
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+.header__button {
+  font-family: "Cabinet Grotesk Bold";
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: rgba(0, 0, 0, 1);
+}
+
+.header__button:hover {
+  color: rgba(0, 0, 0, 0.6);
 }

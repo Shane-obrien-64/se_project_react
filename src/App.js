@@ -10,9 +10,11 @@ import weatherApi, { getForcastWeather, parseData } from "./utils/weatherApi";
 import "./App.css";
 
 function App() {
-  const weatherTemp = "78";
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState("");
+  const [temp, setTemp] = useState(0);
+  const [location, setLocation] = useState("Current Location");
+
   const handleCreateModal = () => {
     setActiveModal("create");
   };
@@ -26,38 +28,71 @@ function App() {
 
   useEffect(() => {
     getForcastWeather().then((data) => {
-      console.log(data);
-      return parseData(data);
+      const location = data.name;
+      const temperature = Math.ceil(data.main.temp);
+      setLocation(location);
+      setTemp(temperature);
     });
   }, []);
 
   return (
     <div>
-      <Header onCreateModal={handleCreateModal} />
-      <Main weatherTemp={weatherTemp} onSelectCard={handleSelectedCard} />
+      <Header onCreateModal={handleCreateModal} location={location} />
+      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
       <Footer />
       {activeModal === "create" && (
-        <ModalWithForm title={"new garment"} onClose={handleCloseModal}>
-          <label>
-            Name
-            <input type="text" name="name" minLength="1" maxLength="30" />
-          </label>
-          <label>
-            Image
-            <input type="url" name="link" />
-          </label>
-          <span>Select weather type:</span>
-          <div>
-            <div>
-              <input type="radio" id="hot" value="hot" />
+        <ModalWithForm
+          name={"add-garment"}
+          title={"New garment"}
+          onClose={handleCloseModal}
+        >
+          <span className="modal__input-label">Name</span>
+          <input
+            className="modal__input"
+            type="text"
+            name="name"
+            minLength="1"
+            maxLength="30"
+            placeholder="Name"
+          />
+          <span className="modal__input-label">Image</span>
+          <input
+            className="modal__input"
+            type="url"
+            name="link"
+            placeholder="Image URL"
+          />
+
+          <div className="modal__weather-type">
+            <span className="modal__label">Select weather type:</span>
+            <div className="modal__radio-group">
+              <input
+                name="weather-type"
+                className="modal__radio"
+                type="radio"
+                id="hot"
+                value="hot"
+              />
               <label>Hot</label>
             </div>
-            <div>
-              <input type="radio" id="warm" value="warm" />
+            <div className="modal__radio-group">
+              <input
+                name="weather-type"
+                className="modal__radio"
+                type="radio"
+                id="warm"
+                value="warm"
+              />
               <label>Warm</label>
             </div>
-            <div>
-              <input type="radio" id="cold" value="cold" />
+            <div className="modal__radio-group">
+              <input
+                name="weather-type"
+                className="modal__radio"
+                type="radio"
+                id="cold"
+                value="cold"
+              />
               <label>Cold</label>
             </div>
           </div>

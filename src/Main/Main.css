@@ -1,6 +1,8 @@
 .main {
-  display: flex;
-  flex-direction: column;
-
+  font-family: "Cabinet Grotesk Bold";
   padding: 0 20px 24px;
+}
+
+.card__suggestion {
+  font-family: "Cabinet Grotesk Bold";
 }
