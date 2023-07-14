@@ -1,5 +1,5 @@
 // import { type } from "@testing-library/user-event/dist/type";
-import "./WeatherCard.css";
+import "../blocks/WeatherCard.css";
 
 const weatherOptions = [
   {
