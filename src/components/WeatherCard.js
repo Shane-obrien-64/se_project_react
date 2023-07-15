@@ -1,7 +1,6 @@
 // import { type } from "@testing-library/user-event/dist/type";
 import "../blocks/WeatherCard.css";
 import { weatherOptions } from "../utils/consts";
-import 
 
 const WeatherCard = ({ isDay, type, weatherTemp }) => {
   const imageSrc = weatherOptions.filter((i) => {
