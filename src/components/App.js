@@ -11,7 +11,7 @@ import "../blocks/App.css";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState("");
+  const [selectedCard, setSelectedCard] = useState(null);
   const [temp, setTemp] = useState(0);
   const [location, setLocation] = useState("Current Location");
 
@@ -27,12 +27,16 @@ function App() {
   };
 
   useEffect(() => {
-    getForcastWeather().then((data) => {
-      const location = data.name;
-      const temperature = Math.ceil(data.main.temp);
-      setLocation(location);
-      setTemp(temperature);
-    });
+    getForcastWeather()
+      .then((data) => {
+        const location = data.name;
+        const temperature = Math.ceil(data.main.temp);
+        setLocation(location);
+        setTemp(temperature);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
