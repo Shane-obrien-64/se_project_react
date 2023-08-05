@@ -5,11 +5,18 @@ import ModalWithForm from "./ModalWithForm";
 const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
-    console.log(e);
-    setName(e.target.value)
-  }
+    setName(e.target.value);
+  };
 
-  const [link, setUrl] 
+  const [link, setUrl] = useState("");
+  const handleUrlChange = (e) => {
+    setUrl(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddItem({ name, link });
+  };
 
   return (
     <ModalWithForm
@@ -17,7 +24,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
       title={"New garment"}
       onClose={handleCloseModal}
       isOpen={isOpen}
-      onSubmit={onAddItem}
+      onSubmit={handleSubmit}
     >
       <span className="modal__input-label">Name</span>
       <input
@@ -27,6 +34,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
         minLength="1"
         maxLength="30"
         placeholder="Name"
+        onChange={handleNameChange}
       />
       <span className="modal__input-label">Image</span>
       <input
@@ -34,6 +42,7 @@ const AddItemModal = ({ handleCloseModal, onAddItem, isOpen }) => {
         type="url"
         name="link"
         placeholder="Image URL"
+        onChange={handleUrlChange}
       />
 
       <div className="modal__weather-type">

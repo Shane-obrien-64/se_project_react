@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
+import Profile from "./Profile";
 import Footer from "./Footer";
 import ModalWithForm from "./ModalWithForm";
 import ItemModal from "./ItemModal";
@@ -34,9 +35,8 @@ function App() {
     currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
   };
 
-  const onAddItem = (e) => {
-    e.preventDefault();
-    console.log(e.target);
+  const onAddItem = (values) => {
+    console.log(values);
   };
 
   useEffect(() => {
@@ -64,7 +64,9 @@ function App() {
       >
         <Header onCreateModal={handleCreateModal} location={location} />
         <Switch>
-          <Route path="/profile">profile</Route>
+          <Route path="/profile">
+            <Profile onSelectCard={handleSelectedCard} />
+          </Route>
           <Route exact path="/">
             <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
           </Route>
