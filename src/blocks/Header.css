@@ -31,8 +31,18 @@
   font-weight: 700;
   line-height: normal;
   color: rgba(0, 0, 0, 1);
+  cursor: pointer;
 }
 
 .header__button:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.header__profile {
+  color: #000;
+  text-decoration: none;
+}
+
+.header__profile:hover {
   color: rgba(0, 0, 0, 0.6);
 }

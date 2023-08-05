@@ -1,0 +1,56 @@
+.switch {
+  display: flex;
+  position: relative;
+  font-family: "Cabinet Grotesk Bold";
+
+  cursor: pointer;
+}
+
+.switch__box {
+  border-radius: 25px;
+  border: 2px solid rgba(0, 0, 0, 0.6);
+  width: 56px;
+  height: 28px;
+  outline: none;
+  appearance: none;
+}
+
+.switch__slider {
+  border-radius: 20px;
+  width: 28px;
+  height: 28px;
+  background-color: #000;
+  color: #fff;
+  position: absolute;
+}
+
+.switch__slider-F {
+  top: 3px;
+  left: 4px;
+}
+
+.switch__slider-C {
+  top: 3px;
+  left: 32px;
+}
+
+.switch__temp-F {
+  font-family: "Cabinet Grotesk Bold";
+  color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: -14px;
+  left: 13px;
+}
+
+.switch__temp-C {
+  font-family: "Cabinet Grotesk Bold";
+
+  color: rgba(0, 0, 0, 0.6);
+  top: -14px;
+  right: 10px;
+  position: absolute;
+}
+
+.switch__active {
+  color: #fff;
+}

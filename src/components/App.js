@@ -6,13 +6,17 @@ import Main from "./Main";
 import Footer from "./Footer";
 import ModalWithForm from "./ModalWithForm";
 import ItemModal from "./ItemModal";
+import AddItemModal from "./AddItemModal";
 import { getForcastWeather } from "../utils/weatherApi";
+import { CurrentTempUnitContext } from "../contexts/CurrentTempUnitContext";
 import "../blocks/App.css";
+import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
   const [temp, setTemp] = useState(0);
+  const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [location, setLocation] = useState("Current Location");
 
   const handleCreateModal = () => {
@@ -26,11 +30,25 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleToggleSwitch = () => {
+    currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
+  };
+
+  const onAddItem = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+  };
+
   useEffect(() => {
     getForcastWeather()
       .then((data) => {
         const location = data.name;
-        const temperature = Math.ceil(data.main.temp);
+        const temperature = {
+          temperature: {
+            F: Math.round(data.main.temp),
+            C: Math.round(((data.main.temp - 32) * 5) / 9),
+          },
+        };
         setLocation(location);
         setTemp(temperature);
       })
@@ -41,70 +59,28 @@ function App() {
 
   return (
     <div>
-      <Header onCreateModal={handleCreateModal} location={location} />
-      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
-      <Footer />
-      {activeModal === "create" && (
-        <ModalWithForm
-          name={"add-garment"}
-          title={"New garment"}
-          onClose={handleCloseModal}
-        >
-          <span className="modal__input-label">Name</span>
-          <input
-            className="modal__input"
-            type="text"
-            name="name"
-            minLength="1"
-            maxLength="30"
-            placeholder="Name"
+      <CurrentTempUnitContext.Provider
+        value={{ currentTempUnit, handleToggleSwitch }}
+      >
+        <Header onCreateModal={handleCreateModal} location={location} />
+        <Switch>
+          <Route path="/profile">profile</Route>
+          <Route exact path="/">
+            <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
+          </Route>
+        </Switch>
+        <Footer />
+        {activeModal === "create" && (
+          <AddItemModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "create"}
+            onAddItem={onAddItem}
           />
-          <span className="modal__input-label">Image</span>
-          <input
-            className="modal__input"
-            type="url"
-            name="link"
-            placeholder="Image URL"
-          />
-
-          <div className="modal__weather-type">
-            <span className="modal__label">Select weather type:</span>
-            <div className="modal__radio-group">
-              <input
-                name="weather-type"
-                className="modal__radio"
-                type="radio"
-                id="hot"
-                value="hot"
-              />
-              <label>Hot</label>
-            </div>
-            <div className="modal__radio-group">
-              <input
-                name="weather-type"
-                className="modal__radio"
-                type="radio"
-                id="warm"
-                value="warm"
-              />
-              <label>Warm</label>
-            </div>
-            <div className="modal__radio-group">
-              <input
-                name="weather-type"
-                className="modal__radio"
-                type="radio"
-                id="cold"
-                value="cold"
-              />
-              <label>Cold</label>
-            </div>
-          </div>
-        </ModalWithForm>
-      )}
-      {activeModal === "preview" && (
-        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
-      )}
+        )}
+        {activeModal === "preview" && (
+          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+        )}
+      </CurrentTempUnitContext.Provider>
     </div>
   );
 }
