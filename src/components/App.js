@@ -19,6 +19,7 @@ function App() {
   const [temp, setTemp] = useState(0);
   const [currentTempUnit, setCurrentTempUnit] = useState("F");
   const [location, setLocation] = useState("Current Location");
+  const [clothingItems, setClothingItems] = useState();
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -37,6 +38,14 @@ function App() {
 
   const onAddItem = (values) => {
     console.log(values);
+  };
+
+  const handleAddItemSubmit = (item) => {
+    setClothingItems(item);
+  };
+
+  const deleteCard = (card) => {
+    console.log(card);
   };
 
   useEffect(() => {
@@ -80,7 +89,11 @@ function App() {
           />
         )}
         {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+          <ItemModal
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            deleteCard={deleteCard}
+          />
         )}
       </CurrentTempUnitContext.Provider>
     </div>
