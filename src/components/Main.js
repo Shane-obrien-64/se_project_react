@@ -7,9 +7,10 @@ import "../blocks/Main.css";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 
 function Main({ weatherTemp, onSelectCard, clothingItems }) {
-  const { CurrentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const temp = weatherTemp?.temperature?.[CurrentTemperatureUnit];
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
   const weather = weatherTemp?.temperature?.F;
+
   const weatherType = useMemo(() => {
     if (weather >= 80) {
       return "hot";
@@ -25,19 +26,20 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
   // });
 
   const filteredCards = clothingItems.filter((item) => {
-    return item.weather === weatherType;
+    return item.weather.toLowerCase() === weatherType;
   });
+
+  console.log(weatherTemp.temperature + currentTemperatureUnit);
 
   return (
     <main className="main">
       <WeatherCard isDay={true} type="clear" weatherTemp={temp} />
       <section className="card__section" id="card-section">
         <div className="card__suggestion">
-          Today is {temp}°{CurrentTemperatureUnit}/ You may want to wear:
+          Today is {temp}°{currentTemperatureUnit}/ You may want to wear:
         </div>
         <div className="card__items">
           {filteredCards.map((item) => {
-            console.log(item.id);
             return (
               <ItemCard key={item.id} item={item} onSelectCard={onSelectCard} />
             );

@@ -40,6 +40,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItem, isOpen }) => {
         maxLength="30"
         placeholder="Name"
         onChange={handleNameChange}
+        value={name}
       />
       <span className="modal__input-label">Image</span>
       <input
@@ -48,6 +49,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItem, isOpen }) => {
         name="link"
         placeholder="Image URL"
         onChange={handleUrlChange}
+        value={imageUrl}
       />
 
       <div className="modal__weather-type">
