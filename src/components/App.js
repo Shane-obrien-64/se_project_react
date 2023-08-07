@@ -99,7 +99,7 @@ function App() {
   return (
     <div>
       <CurrentTemperatureUnitContext.Provider
-        value={{ CurrentTemperatureUnit, handleToggleSwitch }}
+        value={{ currentTemperatureUnit, handleToggleSwitch }}
       >
         <Header onCreateModal={handleCreateModal} location={location} />
         <Switch>
