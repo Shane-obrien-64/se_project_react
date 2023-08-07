@@ -3,7 +3,7 @@ import ItemCard from "./ItemCard";
 import { defaultClothingItems } from "../utils/consts";
 import "../blocks/Profile.css";
 
-function Profile({ onSelectCard }) {
+function Profile({ onCreateModal, onSelectCard, clothingItems }) {
   return (
     <div className="profile">
       <div className="profile__user-section">
@@ -13,16 +13,14 @@ function Profile({ onSelectCard }) {
       <div>
         <div className="profile__items">
           <p className="profile__section-title">Your Items</p>
-          <button className="profile__add-btn">+ Add new</button>
+          <button onClick={onCreateModal} className="profile__add-btn">
+            + Add new
+          </button>
         </div>
         <div className="profile__card-section">
-          {defaultClothingItems.map((item) => {
+          {clothingItems.map((item) => {
             return (
-              <ItemCard
-                key={item._id}
-                item={item}
-                onSelectCard={onSelectCard}
-              />
+              <ItemCard key={item.id} item={item} onSelectCard={onSelectCard} />
             );
           })}
         </div>

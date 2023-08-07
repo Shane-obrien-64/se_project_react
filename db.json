@@ -7,12 +7,6 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Beanie.png?etag=bc10497cc80fa557f036e94f9999f7b2"
     },
     {
-      "id": 1,
-      "name": "Boot",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Boot.png?etag=0953a2ea59f1c6ebc832fabacdc9c70e"
-    },
-    {
       "id": 2,
       "name": "Cap",
       "weather": "hot",
@@ -23,12 +17,6 @@
       "name": "Coat",
       "weather": "cold",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4"
-    },
-    {
-      "name": "Dress",
-      "weather": "hot",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf",
-      "id": 5
     },
     {
       "name": "Hoodie",
@@ -101,6 +89,12 @@
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09",
       "id": 17
+    },
+    {
+      "name": "JNCOS",
+      "weather": "hot",
+      "imageUrl": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.argo-holidays.com%2Fimages%2Fa%2Fjnco%2520jeans-807fsq.jpg&f=1&nofb=1&ipt=0b41476ebb6b9166ec79fa36afd932f597e903fb941e9d3bbedf482448dbcb6a&ipo=images",
+      "id": 18
     }
   ]
 }

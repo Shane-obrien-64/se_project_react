@@ -19,6 +19,7 @@
 .header__avatar-logo {
   display: flex;
   gap: 20px;
+  margin: auto 0;
   align-items: center;
 }
 
