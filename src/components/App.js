@@ -11,7 +11,7 @@ import AddItemModal from "./AddItemModal";
 import api from "../utils/api";
 import { getForcastWeather } from "../utils/weatherApi";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
-import { CurrentTempUnitContext } from "../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 import "../blocks/App.css";
 
 function App() {
