@@ -1,15 +1,13 @@
-import avatarImg from "../images/avatar.svg";
 import ItemCard from "./ItemCard";
-import { defaultClothingItems } from "../utils/consts";
+import SideBar from "./SideBar";
+import ClothesSection from "./ClothesSection";
+// import { defaultClothingItems } from "../utils/consts";
 import "../blocks/Profile.css";
 
 function Profile({ onCreateModal, onSelectCard, clothingItems }) {
   return (
     <div className="profile">
-      <div className="profile__user-section">
-        <img className="profile__img" src={avatarImg} alt="avatar" />
-        <h2 className="profile__title">Terrence Tegegne</h2>
-      </div>
+      <SideBar />
       <div>
         <div className="profile__items">
           <p className="profile__section-title">Your Items</p>
@@ -17,13 +15,10 @@ function Profile({ onCreateModal, onSelectCard, clothingItems }) {
             + Add new
           </button>
         </div>
-        <div className="profile__card-section">
-          {clothingItems.map((item) => {
-            return (
-              <ItemCard key={item.id} item={item} onSelectCard={onSelectCard} />
-            );
-          })}
-        </div>
+        <ClothesSection
+          onSelectCard={onSelectCard}
+          clothingItems={clothingItems}
+        />
       </div>
     </div>
   );

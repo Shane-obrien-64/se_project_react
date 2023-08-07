@@ -1,0 +1,6 @@
+.clothes-section {
+  /* margin: 10px auto 0; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
