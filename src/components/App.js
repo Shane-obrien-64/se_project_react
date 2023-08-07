@@ -98,7 +98,7 @@ function App() {
 
   return (
     <div>
-      <CurrentTempUnitContext.Provider
+      <CurrentTemperatureUnitContext.Provider
         value={{ currentTempUnit, handleToggleSwitch }}
       >
         <Header onCreateModal={handleCreateModal} location={location} />
@@ -133,7 +133,7 @@ function App() {
             deleteCard={deleteCard}
           />
         )}
-      </CurrentTempUnitContext.Provider>
+      </CurrentTemperatureUnitContext.Provider>
     </div>
   );
 }
