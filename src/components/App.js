@@ -18,7 +18,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
   const [temp, setTemp] = useState(0);
-  const [currentTempUnit, setCurrentTempUnit] = useState("F");
+  const [currentTemperatureUnit, setCurrentTempUnit] = useState("F");
   const [location, setLocation] = useState("Current Location");
   const [clothingItems, setClothingItems] = useState([]);
 
@@ -33,8 +33,10 @@ function App() {
     setSelectedCard(card);
   };
 
-  const handleToggleSwitch = () => {
-    currentTempUnit === "F" ? setCurrentTempUnit("C") : setCurrentTempUnit("F");
+  const handleToggleSwitchChange = () => {
+    currentTemperatureUnit === "F"
+      ? setCurrentTempUnit("C")
+      : setCurrentTempUnit("F");
   };
 
   const handleAddItem = (values) => {
@@ -99,7 +101,7 @@ function App() {
   return (
     <div>
       <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitch }}
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <Header onCreateModal={handleCreateModal} location={location} />
         <Switch>

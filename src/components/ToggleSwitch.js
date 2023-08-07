@@ -1,15 +1,10 @@
 import React, { useContext } from "react";
 import "../blocks/ToggleSwitch.css";
-import { CurrentTempUnitContext } from "../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 
 const ToggleSwitch = () => {
-  //   const handleChange = () => {
-  //     if (currentTempUnit === "C") setCurrentTempUnit("F");
-  //     if (currentTempUnit === "F") setCurrentTempUnit("C");
-  //   };
-
-  const { currentTempUnit, handleToggleSwitch } = useContext(
-    CurrentTempUnitContext
+  const { currentTemperatureUnit, handleToggleSwitchChange } = useContext(
+    CurrentTemperatureUnitContext
   );
 
   return (
@@ -17,25 +12,25 @@ const ToggleSwitch = () => {
       <input
         type="checkbox"
         className="switch__box"
-        onChange={handleToggleSwitch}
+        onChange={handleToggleSwitchChange}
       />
       <span
         className={
-          currentTempUnit === "F"
+          currentTemperatureUnit === "F"
             ? "switch__slider switch__slider-F"
             : "switch__slider switch__slider-C"
         }
       ></span>
       <p
         className={`switch__temp-F ${
-          currentTempUnit === "F" && "switch__active"
+          currentTemperatureUnit === "F" && "switch__active"
         }`}
       >
         F
       </p>
       <p
         className={`switch__temp-C ${
-          currentTempUnit === "C" && "switch__active"
+          currentTemperatureUnit === "C" && "switch__active"
         }`}
       >
         C

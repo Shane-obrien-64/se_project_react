@@ -2,10 +2,10 @@
 import "../blocks/WeatherCard.css";
 import { weatherOptions } from "../utils/consts";
 import { useContext } from "react";
-import { CurrentTempUnitContext } from "../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 
 const WeatherCard = ({ isDay, type, weatherTemp }) => {
-  const { currentTempUnit } = useContext(CurrentTempUnitContext);
+  const { CurrentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const imageSrc = weatherOptions.filter((i) => {
     // console.log(i);
     return i.isDay === isDay && i.type === type;
@@ -16,7 +16,7 @@ const WeatherCard = ({ isDay, type, weatherTemp }) => {
     <section className="weather" id="weather">
       <div className="weather__container">
         <div className="weather__temp">
-          {weatherTemp} °{currentTempUnit}
+          {weatherTemp} °{CurrentTemperatureUnit}
         </div>
         <img
           preserveAspectRatio="xMinYMin meet"
