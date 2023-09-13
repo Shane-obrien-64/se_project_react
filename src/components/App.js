@@ -8,6 +8,8 @@ import Footer from "./Footer";
 // import ModalWithForm from "./ModalWithForm";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
+import RegisterModal from "./RegisterModal";
+import LoginModal from "./LoginModal";
 import api from "../utils/api";
 import { getForcastWeather } from "../utils/weatherApi";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
@@ -33,6 +35,14 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleSignUpModal = () => {
+    setActiveModal("signup");
+  };
+
+  const handleLoginModal = () => {
+    setActiveModal("login");
+  };
+
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === "F"
       ? setCurrentTempUnit("C")
@@ -53,6 +63,14 @@ function App() {
       });
   };
 
+  const handleSignUp = (values) => {
+    console.log("signup handled: " + values);
+  };
+
+  const handleLogin = () => {
+    console.log("signed in");
+  };
+
   const deleteCard = (item) => {
     console.log(item.id);
     api
@@ -69,6 +87,10 @@ function App() {
       });
   };
 
+  const goToLogin = () => {
+    setActiveModal("login");
+  };
+
   useEffect(() => {
     api
       .getItems()
@@ -83,7 +105,6 @@ function App() {
   useEffect(() => {
     getForcastWeather()
       .then((data) => {
-        console.log(data);
         const location = data.name;
         const temperature = {
           temperature: {
@@ -115,13 +136,13 @@ function App() {
     };
   }, [activeModal]);
 
-  console.log(temp);
-
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <Header onCreateModal={handleCreateModal} location={location} />
+      {/* <Header onCreateModal={handleCreateModal} location={location} /> */}
+      {/* <Header onCreateModal={handleSignUpModal} location={location} /> */}
+      <Header onCreateModal={handleLoginModal} location={location} />
       <Switch>
         <Route path="/profile">
           <Profile
@@ -151,6 +172,22 @@ function App() {
           selectedCard={selectedCard}
           onClose={handleCloseModal}
           deleteCard={deleteCard}
+        />
+      )}
+      {activeModal === "signup" && (
+        <RegisterModal
+          handleCloseModal={handleCloseModal}
+          isOpen={activeModal === "signup"}
+          handleSignUp={handleSignUp}
+          goToLogin={goToLogin}
+        />
+      )}
+      {activeModal === "login" && (
+        <LoginModal
+          handleCloseModal={handleCloseModal}
+          isOpen={activeModal === "login"}
+          handleLogin={handleLogin}
+          // goToLogin={goToLogin}
         />
       )}
     </CurrentTemperatureUnitContext.Provider>

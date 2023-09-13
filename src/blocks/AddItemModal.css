@@ -52,12 +52,12 @@
   width: 100%;
   border-style: none;
   border-bottom: 1px solid #000;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 1);
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
-  margin-bottom: 24px;
+  margin: 0 0 24px;
 }
 
 .modal__label {
