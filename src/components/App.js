@@ -5,11 +5,11 @@ import Header from "./Header";
 import Main from "./Main";
 import Profile from "./Profile";
 import Footer from "./Footer";
-// import ModalWithForm from "./ModalWithForm";
 import ItemModal from "./ItemModal";
 import AddItemModal from "./AddItemModal";
 import RegisterModal from "./RegisterModal";
 import LoginModal from "./LoginModal";
+import ProtectedRoute from "./ProtectedRoute";
 import api from "../utils/api";
 import { getForcastWeather } from "../utils/weatherApi";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
@@ -17,6 +17,7 @@ import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUni
 import "../blocks/App.css";
 
 function App() {
+  const [loggedIn, setLogin] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
   const [temp, setTemp] = useState(0);
@@ -141,21 +142,29 @@ function App() {
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
       {/* <Header onCreateModal={handleCreateModal} location={location} /> */}
-      {/* <Header onCreateModal={handleSignUpModal} location={location} /> */}
-      <Header onCreateModal={handleLoginModal} location={location} />
+      <Header onCreateModal={handleSignUpModal} location={location} />
+      {/* <Header onCreateModal={handleLoginModal} location={location} /> */}
       <Switch>
-        <Route path="/profile">
+        <ProtectedRoute path="/profile" loggedIn={loggedIn}>
           <Profile
             onCreateModal={handleCreateModal}
             clothingItems={clothingItems}
             onSelectCard={handleSelectedCard}
           />
-        </Route>
+        </ProtectedRoute>
+        {/* <Route path="/profile">
+          <Profile
+            onCreateModal={handleCreateModal}
+            clothingItems={clothingItems}
+            onSelectCard={handleSelectedCard}
+          />
+        </Route> */}
         <Route exact path="/">
           <Main
             weatherTemp={temp}
             onSelectCard={handleSelectedCard}
             clothingItems={clothingItems}
+            loggedIn={loggedIn}
           />
         </Route>
       </Switch>
