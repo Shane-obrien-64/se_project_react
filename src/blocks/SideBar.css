@@ -1,6 +1,13 @@
 .side-bar {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   margin-right: 100px;
+}
+
+.side-bar__group {
+  display: flex;
+  margin-bottom: 20px;
 }
 
 .side-bar__img {
@@ -12,4 +19,21 @@
 .side-bar__title {
   font-size: 20px;
   width: 157px;
+}
+
+.side-bar__btn {
+  font-family: "Cabinet Grotesk Bold";
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  margin-bottom: 9px;
+}
+
+.side-bar__btn:hover {
+  color: rgba(0, 0, 0, 0.6);
 }

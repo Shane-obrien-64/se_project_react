@@ -39,6 +39,13 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
+.header__loggedin {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  gap: 10px;
+}
+
 .header__profile {
   color: #000;
   text-decoration: none;

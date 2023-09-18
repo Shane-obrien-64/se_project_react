@@ -4,7 +4,14 @@ import { Link } from "react-router-dom";
 import ToggleSwitch from "./ToggleSwitch";
 import "../blocks/Header.css";
 
-const Header = ({ onCreateModal, location }) => {
+const Header = ({
+  onCreateModal,
+  location,
+  loggedIn,
+  handleLoginModal,
+  handleSignUpModal,
+}) => {
+  console.log();
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -23,21 +30,26 @@ const Header = ({ onCreateModal, location }) => {
       </div>
       <div className="header__avatar-logo">
         <ToggleSwitch />
-        <div>
-          <button
-            className="header__button"
-            type="text"
-            onClick={onCreateModal}
-          >
-            + add new clothes
-          </button>
-        </div>
-        <Link to="/profile" className="header__profile">
-          Terrence Tegegne
-        </Link>
-        <div>
-          <img src={avatarImg} alt="avatar" />
-        </div>
+        {loggedIn ? (
+          <div className="header__loggedin">
+            <button
+              className="header__button"
+              type="text"
+              onClick={onCreateModal}
+            >
+              + add new clothes
+            </button>
+            <Link to="/profile" className="header__profile">
+              Terrence Tegegne
+            </Link>
+            <img src={avatarImg} alt="avatar" />
+          </div>
+        ) : (
+          <div className="header__avatar-logo">
+            <button className="header__button">Sign up</button>
+            <button className="header__button">Log in</button>
+          </div>
+        )}
       </div>
     </header>
   );

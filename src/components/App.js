@@ -83,8 +83,6 @@ function App() {
     auth
       .login(email, password)
       .then((res) => {
-        console.log(res);
-        console.log(auth.checkToken(res));
         setLogin(true);
         handleCloseModal();
       })
@@ -159,10 +157,11 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     if (token) {
       auth.checkToken(token).then((res) => {
-        setLogin(res);
+        console.log(res);
+        // setCurrentUser(res);
+        setLogin(true);
       });
     }
   }, []);
@@ -172,9 +171,16 @@ function App() {
       <CurrentTemperatureUnitContext.Provider
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
-        {/* <Header onCreateModal={handleCreateModal} location={location} /> */}
+        <Header
+          onCreateModal={handleCreateModal}
+          location={location}
+          loggedIn={loggedIn}
+          handleLoginModal={handleLoginModal}
+          handleSignUpModal={handleSignUpModal}
+        />
+
         {/* <Header onCreateModal={handleSignUpModal} location={location} /> */}
-        <Header onCreateModal={handleLoginModal} location={location} />
+        {/* <Header onCreateModal={handleLoginModal} location={location} /> */}
         <Switch>
           <ProtectedRoute path="/profile" loggedIn={loggedIn}>
             <Profile
