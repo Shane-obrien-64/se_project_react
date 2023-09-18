@@ -1,40 +1,63 @@
+import { handleServerRes } from "./api";
 const BASE_URL = "http://localhost:3001";
 
-export const register = (username, email, password) => {
-  return fetch(`${BASE_URL}/auth/local/register`, {
+const register = ({ email, password, name, avatar }) => {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, email, password }),
-  })
-    .then((res) => {
-      if (res.status === 201) {
-        return res.json();
-      }
-    })
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => console.log(err));
+    body: JSON.stringify({
+      email,
+      password,
+      name,
+      avatar,
+    }),
+  }).then(handleServerRes);
 };
 
-export const login = (identifier, password) => {
-  return fetch(`${BASE_URL}/auth/local`, {
+const login = (email, password) => {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ identifier, password }),
+    body: JSON.stringify({ email, password }),
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.jwt) {
-        localStorage.setItem("jwt", data.jwt);
-        return data;
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        return data.token;
       }
     })
     .catch((err) => console.log(err));
 };
+
+const checkToken = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (res) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch((err) => console.log(err));
+};
+
+const auth = {
+  register,
+  login,
+  checkToken,
+};
+
+export default auth;

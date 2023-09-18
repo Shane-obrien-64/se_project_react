@@ -29,8 +29,6 @@ function Main({ weatherTemp, onSelectCard, clothingItems, loggedIn }) {
     return item.weather.toLowerCase() === weatherType;
   });
 
-  console.log(weatherTemp.temperature + currentTemperatureUnit);
-
   return (
     <main className="main">
       <WeatherCard isDay={true} type="clear" weatherTemp={temp} />

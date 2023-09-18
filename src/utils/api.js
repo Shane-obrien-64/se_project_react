@@ -2,6 +2,8 @@
 const baseUrl =
   "https://my-json-server.typicode.com/Shane-obrien-64/se_project_react";
 
+const token = localStorage.getItem("token");
+
 export const handleServerRes = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
@@ -19,6 +21,7 @@ const addItem = ({ name, weather, imageUrl }) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name,
@@ -33,6 +36,7 @@ const deleteItem = (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   }).then(handleServerRes);
 };

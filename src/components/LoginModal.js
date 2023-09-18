@@ -14,8 +14,12 @@ const LoginModal = ({ handleCloseModal, handleLogin }) => {
   };
 
   const handleSubmit = (e) => {
+    console.log(email, password);
     e.preventDefault();
-    handleLogin({ email, password });
+    if (!email || !password) {
+      return;
+    }
+    handleLogin(email, password);
   };
 
   return (
