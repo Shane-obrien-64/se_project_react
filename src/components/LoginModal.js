@@ -34,8 +34,6 @@ const LoginModal = ({ handleCloseModal, handleLogin }) => {
         className="modal__input"
         type="email"
         name="email"
-        minLength="1"
-        maxLength="30"
         placeholder="Email"
         onChange={handleEmailChange}
         value={email}
@@ -45,8 +43,6 @@ const LoginModal = ({ handleCloseModal, handleLogin }) => {
         className="modal__input"
         type="password"
         name="password"
-        minLength="8"
-        maxLength="30"
         placeholder="Password"
         onChange={handlePasswordChange}
         value={password}

@@ -54,3 +54,9 @@
 .header__profile:hover {
   color: rgba(0, 0, 0, 0.6);
 }
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

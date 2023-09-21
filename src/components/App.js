@@ -15,8 +15,10 @@ import { getForcastWeather } from "../utils/weatherApi";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useHistory } from "react-router-dom";
 import auth from "../utils/auth";
 import "../blocks/App.css";
+import EditProfileModal from "./EditProfileModal";
 
 function App() {
   const [loggedIn, setLogin] = useState(false);
@@ -27,6 +29,8 @@ function App() {
   const [location, setLocation] = useState("Current Location");
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
+
+  const history = useHistory();
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -47,6 +51,10 @@ function App() {
     setActiveModal("login");
   };
 
+  const handleEditModal = () => {
+    setActiveModal("edit");
+  };
+
   const handleToggleSwitchChange = () => {
     currentTemperatureUnit === "F"
       ? setCurrentTempUnit("C")
@@ -59,7 +67,6 @@ function App() {
       .addItem(values)
       .then((data) => {
         setClothingItems([data, ...clothingItems]);
-        console.log(data);
         handleCloseModal();
       })
       .catch((err) => {
@@ -72,6 +79,19 @@ function App() {
       .register(values)
       .then((res) => {
         console.log(res);
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const HandleEditProfile = (data) => {
+    const { name, avatar } = data;
+    api
+      .editUser({ name, avatar })
+      .then((res) => {
+        setCurrentUser(res);
         handleCloseModal();
       })
       .catch((err) => {
@@ -106,8 +126,31 @@ function App() {
       });
   };
 
-  const goToLogin = () => {
-    setActiveModal("login");
+  const handleLikeClick = ({ id, isLiked, user }) => {
+    const token = localStorage.getItem("jwt");
+    isLiked
+      ? api
+          .likeItem(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === id ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err))
+      : api
+          .dislikeItem(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((c) => (c._id === id ? updatedCard : c))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    handleCloseModal();
+    setLogin(false);
   };
 
   useEffect(() => {
@@ -159,8 +202,7 @@ function App() {
     const token = localStorage.getItem("token");
     if (token) {
       auth.checkToken(token).then((res) => {
-        console.log(res);
-        // setCurrentUser(res);
+        setCurrentUser(res);
         setLogin(true);
       });
     }
@@ -187,6 +229,8 @@ function App() {
               onCreateModal={handleCreateModal}
               clothingItems={clothingItems}
               onSelectCard={handleSelectedCard}
+              handleEditModal={handleEditModal}
+              handleSignOut={handleSignOut}
             />
           </ProtectedRoute>
           <Route exact path="/">
@@ -195,6 +239,7 @@ function App() {
               onSelectCard={handleSelectedCard}
               clothingItems={clothingItems}
               loggedIn={loggedIn}
+              handleLikeClick={handleLikeClick}
             />
           </Route>
         </Switch>
@@ -218,7 +263,7 @@ function App() {
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "signup"}
             handleSignUp={handleSignUp}
-            goToLogin={goToLogin}
+            handleLoginModal={handleLoginModal}
           />
         )}
         {activeModal === "login" && (
@@ -227,6 +272,12 @@ function App() {
             isOpen={activeModal === "login"}
             handleLogin={handleLogin}
             // goToLogin={goToLogin}
+          />
+        )}
+        {activeModal === "edit" && (
+          <EditProfileModal
+            handleCloseModal={handleCloseModal}
+            HandleEditProfile={HandleEditProfile}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>

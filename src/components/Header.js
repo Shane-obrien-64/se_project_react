@@ -1,6 +1,8 @@
 import headerLogo from "../images/Logo.svg";
 import avatarImg from "../images/avatar.svg";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import ToggleSwitch from "./ToggleSwitch";
 import "../blocks/Header.css";
 
@@ -11,7 +13,9 @@ const Header = ({
   handleLoginModal,
   handleSignUpModal,
 }) => {
-  console.log();
+  const { currentUser } = useContext(CurrentUserContext);
+  const { name, avatar } = currentUser;
+
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -40,14 +44,18 @@ const Header = ({
               + add new clothes
             </button>
             <Link to="/profile" className="header__profile">
-              Terrence Tegegne
+              {name}
             </Link>
-            <img src={avatarImg} alt="avatar" />
+            <img className="header__avatar" src={avatar} alt="avatar" />
           </div>
         ) : (
           <div className="header__avatar-logo">
-            <button className="header__button">Sign up</button>
-            <button className="header__button">Log in</button>
+            <button className="header__button" onClick={handleSignUpModal}>
+              Sign up
+            </button>
+            <button className="header__button" onClick={handleLoginModal}>
+              Log in
+            </button>
           </div>
         )}
       </div>

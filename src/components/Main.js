@@ -1,12 +1,16 @@
 import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
-// import { defaultClothingItems } from "../utils/consts";
-
 import { useContext, useMemo } from "react";
 import "../blocks/Main.css";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherTemp, onSelectCard, clothingItems, loggedIn }) {
+function Main({
+  weatherTemp,
+  onSelectCard,
+  clothingItems,
+  loggedIn,
+  handleLikeClick,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
   const weather = weatherTemp?.temperature?.F;
@@ -21,12 +25,8 @@ function Main({ weatherTemp, onSelectCard, clothingItems, loggedIn }) {
     }
   }, [temp]);
 
-  // const filteredCards = defaultClothingItems.filter((item) => {
-  //   return item.weather.toLowerCase() === weatherType;
-  // });
-
   const filteredCards = clothingItems.filter((item) => {
-    return item.weather.toLowerCase() === weatherType;
+    return item.weather === weatherType;
   });
 
   return (
@@ -44,6 +44,7 @@ function Main({ weatherTemp, onSelectCard, clothingItems, loggedIn }) {
                   key={item.id}
                   item={item}
                   onSelectCard={onSelectCard}
+                  handleLikeClick={handleLikeClick}
                 />
               );
             })}

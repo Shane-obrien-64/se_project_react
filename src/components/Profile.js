@@ -4,10 +4,19 @@ import ClothesSection from "./ClothesSection";
 // import { defaultClothingItems } from "../utils/consts";
 import "../blocks/Profile.css";
 
-function Profile({ onCreateModal, onSelectCard, clothingItems }) {
+function Profile({
+  onCreateModal,
+  onSelectCard,
+  clothingItems,
+  handleEditModal,
+  handleSignOut,
+}) {
   return (
     <div className="profile">
-      <SideBar />
+      <SideBar
+        handleEditModal={handleEditModal}
+        handleSignOut={handleSignOut}
+      />
       <div>
         <div className="profile__items">
           <p className="profile__section-title">Your Items</p>

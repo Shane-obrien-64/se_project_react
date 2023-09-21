@@ -19,7 +19,8 @@
   position: absolute;
   top: 20px;
   right: 28px;
-  background: #f5f5f5 url("../images/close-icon-item.svg") center no-repeat;
+  background: rgba(0, 0, 0, 0.1) url("../images/close-icon-item.svg") center
+    no-repeat;
   width: 20px;
   height: 20px;
   border: none;
@@ -27,7 +28,7 @@
 }
 
 .modal__item-close:hover {
-  background-color: #d3d3d3;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal__item-name {
@@ -63,4 +64,22 @@
   color: #ff4d00;
   cursor: pointer;
   margin-right: 32px;
+}
+
+.item__delete-button_visible {
+  font-family: "Cabinet Grotesk Bold";
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  line-height: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  color: #ff4d00;
+  cursor: pointer;
+  margin-right: 32px;
+}
+.item__delete-button_hidden {
+  visibility: hidden;
+  pointer-events: none;
 }

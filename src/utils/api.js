@@ -17,7 +17,7 @@ const getItems = () => {
 };
 
 const addItem = ({ name, weather, imageUrl }) => {
-  return fetch(`${baseUrl}/items`, {
+  return fetch(`$baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -41,10 +41,47 @@ const deleteItem = (id) => {
   }).then(handleServerRes);
 };
 
+const editUser = (data) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      name: data.name,
+      avatar: data.avatar,
+    }),
+  }).then(handleServerRes);
+};
+
+const likeItem = (itemId) => {
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerRes);
+};
+
+const dislikeItem = (itemId) => {
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerRes);
+};
+
 const api = {
   getItems,
   addItem,
   deleteItem,
+  editUser,
+  likeItem,
+  dislikeItem,
 };
 
 export default api;

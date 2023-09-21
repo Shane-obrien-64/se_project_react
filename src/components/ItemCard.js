@@ -1,6 +1,6 @@
 import "../blocks/ItemCard.css";
 
-const ItemCard = ({ item, onSelectCard }) => {
+const ItemCard = ({ item, onSelectCard, handleLikeClick }) => {
   return (
     <div className="card">
       <div className="card__title">{item.name}</div>

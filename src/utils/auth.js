@@ -36,36 +36,7 @@ const login = (email, password) => {
     .catch((err) => console.log(err));
 };
 
-// const checkToken = (token) => {
-//   return fetch(`${BASE_URL}/users/me`, {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       authorization: `Bearer ${token}`,
-//     },
-//   })
-//     .then((res) => {
-//       if (res) {
-//         console.log(res);
-//         return true;
-//       } else {
-//         return false;
-//       }
-//     })
-//     .catch((err) => console.log(err));
-// };
-
 const checkToken = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  }).catch((err) => console.log(err));
-};
-
-const getUser = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
@@ -74,7 +45,7 @@ const getUser = (token) => {
     },
   })
     .then((res) => {
-      console.log(res);
+      return res.json();
     })
     .catch((err) => console.log(err));
 };
@@ -83,7 +54,6 @@ const auth = {
   register,
   login,
   checkToken,
-  getUser,
 };
 
 export default auth;
