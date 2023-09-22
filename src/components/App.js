@@ -62,11 +62,11 @@ function App() {
   };
 
   const handleAddItem = (values) => {
-    console.log(values);
     api
       .addItem(values)
       .then((data) => {
-        setClothingItems([data, ...clothingItems]);
+        console.log(data.data);
+        setClothingItems([...clothingItems, data.data]);
         handleCloseModal();
       })
       .catch((err) => {
@@ -78,7 +78,6 @@ function App() {
     auth
       .register(values)
       .then((res) => {
-        console.log(res);
         handleCloseModal();
       })
       .catch((err) => {
@@ -113,10 +112,10 @@ function App() {
 
   const deleteCard = (item) => {
     api
-      .deleteItem(item.id)
+      .deleteItem(item._id)
       .then(() => {
         const newClothingList = clothingItems.filter((card) => {
-          return card.id !== item.id;
+          return card._id !== item._id;
         });
         setClothingItems(newClothingList);
         handleCloseModal();
@@ -126,23 +125,25 @@ function App() {
       });
   };
 
-  const handleLikeClick = ({ id, isLiked, user }) => {
+  const handleLikeClick = ({ _id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     isLiked
       ? api
-          .likeItem(id, token)
+          .dislikeItem(_id, token)
           .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((c) => (c._id === id ? updatedCard : c))
+            const updatedItems = clothingItems.map((c) =>
+              c._id === _id ? updatedCard.item : c
             );
+            setClothingItems(updatedItems);
           })
           .catch((err) => console.log(err))
       : api
-          .dislikeItem(id, token)
+          .likeItem(_id, token)
           .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((c) => (c._id === id ? updatedCard : c))
+            const updatedItems = clothingItems.map((c) =>
+              c._id === _id ? updatedCard.item : c
             );
+            setClothingItems(updatedItems);
           })
           .catch((err) => console.log(err));
   };
@@ -231,6 +232,7 @@ function App() {
               onSelectCard={handleSelectedCard}
               handleEditModal={handleEditModal}
               handleSignOut={handleSignOut}
+              handleLikeClick={handleLikeClick}
             />
           </ProtectedRoute>
           <Route exact path="/">
@@ -240,6 +242,7 @@ function App() {
               clothingItems={clothingItems}
               loggedIn={loggedIn}
               handleLikeClick={handleLikeClick}
+              currentUser={currentUser}
             />
           </Route>
         </Switch>

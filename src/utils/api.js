@@ -1,6 +1,4 @@
 const baseUrl = "http://localhost:3001";
-// const baseUrl =
-//   "https://my-json-server.typicode.com/Shane-obrien-64/se_project_react";
 
 const token = localStorage.getItem("token");
 
@@ -17,7 +15,8 @@ const getItems = () => {
 };
 
 const addItem = ({ name, weather, imageUrl }) => {
-  return fetch(`$baseUrl}/items`, {
+  console.log();
+  return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

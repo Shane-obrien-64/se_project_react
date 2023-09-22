@@ -10,6 +10,7 @@ function Main({
   clothingItems,
   loggedIn,
   handleLikeClick,
+  currentUser,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
@@ -39,12 +40,14 @@ function Main({
         <div className="card__items">
           {loggedIn &&
             filteredCards.map((item) => {
+              const isLiked = item.likes.includes(currentUser._id);
               return (
                 <ItemCard
-                  key={item.id}
+                  key={item._id}
                   item={item}
                   onSelectCard={onSelectCard}
                   handleLikeClick={handleLikeClick}
+                  isLiked={isLiked}
                 />
               );
             })}

@@ -10,6 +10,7 @@ function Profile({
   clothingItems,
   handleEditModal,
   handleSignOut,
+  handleLikeClick,
 }) {
   return (
     <div className="profile">
@@ -27,6 +28,7 @@ function Profile({
         <ClothesSection
           onSelectCard={onSelectCard}
           clothingItems={clothingItems}
+          handleLikeClick={handleLikeClick}
         />
       </div>
     </div>
