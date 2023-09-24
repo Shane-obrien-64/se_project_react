@@ -38,11 +38,13 @@ function Main({
           Today is {temp}°{currentTemperatureUnit}/ You may want to wear:
         </div>
         <div className="card__items">
-          {loggedIn &&
+          {
+            /* {loggedIn && */
             filteredCards.map((item) => {
               const isLiked = item.likes.includes(currentUser._id);
               return (
                 <ItemCard
+                  loggedIn={loggedIn}
                   key={item._id}
                   item={item}
                   onSelectCard={onSelectCard}
@@ -50,7 +52,8 @@ function Main({
                   isLiked={isLiked}
                 />
               );
-            })}
+            })
+          }
         </div>
       </section>
     </main>

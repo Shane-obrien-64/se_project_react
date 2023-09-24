@@ -3,7 +3,11 @@ import ModalWithForm from "./ModalWithForm";
 import { register } from "../utils/auth";
 import "../blocks/RegisterModal.css";
 
-const RegisterModal = ({ handleCloseModal, handleSignUp, goToLogin }) => {
+const RegisterModal = ({
+  handleCloseModal,
+  handleSignUp,
+  handleLoginModal,
+}) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -80,7 +84,11 @@ const RegisterModal = ({ handleCloseModal, handleSignUp, goToLogin }) => {
       <button className="modal__submit-btn" type="submit">
         Next
       </button>
-      <button className="modal__login-btn" onClick={goToLogin} type="button">
+      <button
+        className="modal__login-btn"
+        onClick={handleLoginModal}
+        type="button"
+      >
         or Log in
       </button>
     </ModalWithForm>

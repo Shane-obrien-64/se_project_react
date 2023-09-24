@@ -1,5 +1,4 @@
 import headerLogo from "../images/Logo.svg";
-import avatarImg from "../images/avatar.svg";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -46,7 +45,9 @@ const Header = ({
             <Link to="/profile" className="header__profile">
               {name}
             </Link>
-            <img className="header__avatar" src={avatar} alt="avatar" />
+            <Link to="profile" className="header__avatar">
+              <img className="header__avatar" src={avatar} alt="avatar" />
+            </Link>
           </div>
         ) : (
           <div className="header__avatar-logo">

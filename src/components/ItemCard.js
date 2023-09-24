@@ -1,7 +1,13 @@
 import { useState } from "react";
 import "../blocks/ItemCard.css";
 
-const ItemCard = ({ item, onSelectCard, handleLikeClick, isLiked }) => {
+const ItemCard = ({
+  item,
+  onSelectCard,
+  handleLikeClick,
+  isLiked,
+  loggedIn,
+}) => {
   const { _id } = item;
   const onCardLike = () => {
     handleLikeClick({ _id, isLiked });
@@ -17,11 +23,13 @@ const ItemCard = ({ item, onSelectCard, handleLikeClick, isLiked }) => {
     <div className="card">
       <div className="card__container">
         <div className="card__title">{item.name}</div>
-        <button
-          type="button"
-          onClick={onCardLike}
-          className={likeBtnClassName}
-        />
+        {loggedIn && (
+          <button
+            type="button"
+            onClick={onCardLike}
+            className={likeBtnClassName}
+          />
+        )}
       </div>
       <img
         className="card__image"

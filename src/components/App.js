@@ -15,7 +15,6 @@ import { getForcastWeather } from "../utils/weatherApi";
 import { Route, Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { useHistory } from "react-router-dom";
 import auth from "../utils/auth";
 import "../blocks/App.css";
 import EditProfileModal from "./EditProfileModal";
@@ -29,8 +28,6 @@ function App() {
   const [location, setLocation] = useState("Current Location");
   const [clothingItems, setClothingItems] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
-
-  const history = useHistory();
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -65,7 +62,6 @@ function App() {
     api
       .addItem(values)
       .then((data) => {
-        console.log(data.data);
         setClothingItems([...clothingItems, data.data]);
         handleCloseModal();
       })
@@ -78,7 +74,7 @@ function App() {
     auth
       .register(values)
       .then((res) => {
-        handleCloseModal();
+        handleLoginModal();
       })
       .catch((err) => {
         console.error(err);
@@ -102,8 +98,11 @@ function App() {
     auth
       .login(email, password)
       .then((res) => {
-        setLogin(true);
-        handleCloseModal();
+        if (res) {
+          setLogin(true);
+          handleCloseModal();
+          window.location.reload();
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -127,6 +126,7 @@ function App() {
 
   const handleLikeClick = ({ _id, isLiked }) => {
     const token = localStorage.getItem("jwt");
+    console.log(isLiked);
     isLiked
       ? api
           .dislikeItem(_id, token)
@@ -152,6 +152,7 @@ function App() {
     localStorage.removeItem("token");
     handleCloseModal();
     setLogin(false);
+    setCurrentUser({});
   };
 
   useEffect(() => {
@@ -205,9 +206,10 @@ function App() {
       auth.checkToken(token).then((res) => {
         setCurrentUser(res);
         setLogin(true);
+        console.log(loggedIn);
       });
     }
-  }, []);
+  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
@@ -221,9 +223,6 @@ function App() {
           handleLoginModal={handleLoginModal}
           handleSignUpModal={handleSignUpModal}
         />
-
-        {/* <Header onCreateModal={handleSignUpModal} location={location} /> */}
-        {/* <Header onCreateModal={handleLoginModal} location={location} /> */}
         <Switch>
           <ProtectedRoute path="/profile" loggedIn={loggedIn}>
             <Profile
@@ -233,6 +232,7 @@ function App() {
               handleEditModal={handleEditModal}
               handleSignOut={handleSignOut}
               handleLikeClick={handleLikeClick}
+              loggedIn={loggedIn}
             />
           </ProtectedRoute>
           <Route exact path="/">
@@ -274,7 +274,7 @@ function App() {
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "login"}
             handleLogin={handleLogin}
-            // goToLogin={goToLogin}
+            handleSignUpModal={handleSignUpModal}
           />
         )}
         {activeModal === "edit" && (

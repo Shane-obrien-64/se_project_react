@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
 import "../blocks/LoginModal.css";
 
-const LoginModal = ({ handleCloseModal, handleLogin }) => {
+const LoginModal = ({ handleCloseModal, handleLogin, handleSignUpModal }) => {
   const [email, setEmail] = useState("");
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -14,12 +14,11 @@ const LoginModal = ({ handleCloseModal, handleLogin }) => {
   };
 
   const handleSubmit = (e) => {
-    console.log(email, password);
-    e.preventDefault();
     if (!email || !password) {
       return;
     }
     handleLogin(email, password);
+    e.preventDefault();
   };
 
   return (
@@ -52,7 +51,7 @@ const LoginModal = ({ handleCloseModal, handleLogin }) => {
       </button>
       <button
         className="modal__register-btn"
-        onClick={() => console.log("click")}
+        onClick={handleSignUpModal}
         type="button"
       >
         or Register
