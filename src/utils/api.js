@@ -1,7 +1,5 @@
 const baseUrl = "http://localhost:3001";
 
-const token = localStorage.getItem("token");
-
 export const handleServerRes = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 };
@@ -15,6 +13,7 @@ const getItems = () => {
 };
 
 const addItem = ({ name, weather, imageUrl }) => {
+  const token = localStorage.getItem("token");
   console.log();
   return fetch(`${baseUrl}/items`, {
     method: "POST",
@@ -31,6 +30,7 @@ const addItem = ({ name, weather, imageUrl }) => {
 };
 
 const deleteItem = (id) => {
+  const token = localStorage.getItem("token");
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
@@ -41,6 +41,7 @@ const deleteItem = (id) => {
 };
 
 const editUser = (data) => {
+  const token = localStorage.getItem("token");
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
@@ -55,6 +56,7 @@ const editUser = (data) => {
 };
 
 const likeItem = (itemId) => {
+  const token = localStorage.getItem("token");
   return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "PUT",
     headers: {
@@ -65,6 +67,7 @@ const likeItem = (itemId) => {
 };
 
 const dislikeItem = (itemId) => {
+  const token = localStorage.getItem("token");
   return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: {

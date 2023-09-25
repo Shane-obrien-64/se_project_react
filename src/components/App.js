@@ -204,8 +204,8 @@ function App() {
       auth
         .checkToken(token)
         .then((res) => {
-          setCurrentUser(res);
           setLogin(true);
+          setCurrentUser(res);
         })
         .catch((err) => {
           console.error(err);
