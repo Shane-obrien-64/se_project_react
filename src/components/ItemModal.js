@@ -11,36 +11,36 @@ const ItemModal = ({ selectedCard, onClose, deleteCard }) => {
     isOwn ? "item__delete-button_visible" : "item__delete-button_hidden"
   }`;
 
+  const handleOverlay = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div>
-      <div className={"modal"}>
-        <div className="modal__item-card">
-          <button
-            className="modal__item-close"
-            type="button"
-            onClick={onClose}
-          />
-          <img
-            className="modal__img"
-            src={selectedCard.imageUrl}
-            alt={selectedCard.name}
-          />
-          <div className="modal__card-info">
-            <div>
-              <div className="modal__item-name">{selectedCard.name}</div>
-              <div className="modal__item-type">
-                Weather: {selectedCard.weather}
-              </div>
+    <div className={"modal"} onClick={handleOverlay}>
+      <div className="modal__item-card">
+        <button className="modal__item-close" type="button" onClick={onClose} />
+        <img
+          className="modal__img"
+          src={selectedCard.imageUrl}
+          alt={selectedCard.name}
+        />
+        <div className="modal__card-info">
+          <div>
+            <h3 className="modal__item-name">{selectedCard.name}</h3>
+            <div className="modal__item-type">
+              Weather: {selectedCard.weather}
             </div>
-            <button
-              onClick={() => {
-                deleteCard(selectedCard);
-              }}
-              className={deleteBtnClass}
-            >
-              Delete item
-            </button>
           </div>
+          <button
+            onClick={() => {
+              deleteCard(selectedCard);
+            }}
+            className={deleteBtnClass}
+          >
+            Delete item
+          </button>
         </div>
       </div>
     </div>

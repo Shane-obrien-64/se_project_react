@@ -62,7 +62,7 @@ function App() {
     api
       .addItem(values)
       .then((data) => {
-        setClothingItems([...clothingItems, data.data]);
+        setClothingItems([data.data, ...clothingItems]);
         handleCloseModal();
       })
       .catch((err) => {
@@ -81,7 +81,7 @@ function App() {
       });
   };
 
-  const HandleEditProfile = (data) => {
+  const handleEditProfile = (data) => {
     const { name, avatar } = data;
     api
       .editUser({ name, avatar })
@@ -101,7 +101,6 @@ function App() {
         if (res) {
           setLogin(true);
           handleCloseModal();
-          window.location.reload();
         }
       })
       .catch((err) => {
@@ -126,7 +125,6 @@ function App() {
 
   const handleLikeClick = ({ _id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    console.log(isLiked);
     isLiked
       ? api
           .dislikeItem(_id, token)
@@ -203,11 +201,15 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      auth.checkToken(token).then((res) => {
-        setCurrentUser(res);
-        setLogin(true);
-        console.log(loggedIn);
-      });
+      auth
+        .checkToken(token)
+        .then((res) => {
+          setCurrentUser(res);
+          setLogin(true);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
   }, [loggedIn]);
 
@@ -280,7 +282,7 @@ function App() {
         {activeModal === "edit" && (
           <EditProfileModal
             handleCloseModal={handleCloseModal}
-            HandleEditProfile={HandleEditProfile}
+            handleEditProfile={handleEditProfile}
           />
         )}
       </CurrentTemperatureUnitContext.Provider>

@@ -7,10 +7,8 @@ import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUni
 const WeatherCard = ({ isDay, type, weatherTemp }) => {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const imageSrc = weatherOptions.filter((i) => {
-    // console.log(i);
     return i.isDay === isDay && i.type === type;
   });
-  const src = imageSrc[0].url;
 
   return (
     <section className="weather" id="weather">
@@ -21,8 +19,8 @@ const WeatherCard = ({ isDay, type, weatherTemp }) => {
         <img
           preserveAspectRatio="xMinYMin meet"
           className="weather__img"
-          src={src}
-          alt=""
+          src={imageSrc[0].url}
+          alt={imageSrc[0].type + " skies"}
         ></img>
       </div>
     </section>

@@ -2,6 +2,7 @@ import WeatherCard from "./WeatherCard";
 import ItemCard from "./ItemCard";
 import { useContext, useMemo } from "react";
 import "../blocks/Main.css";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 
 function Main({
@@ -10,9 +11,9 @@ function Main({
   clothingItems,
   loggedIn,
   handleLikeClick,
-  currentUser,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const { currentUser } = useContext(CurrentUserContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
   const weather = weatherTemp?.temperature?.F;
 
@@ -38,22 +39,19 @@ function Main({
           Today is {temp}°{currentTemperatureUnit}/ You may want to wear:
         </div>
         <div className="card__items">
-          {
-            /* {loggedIn && */
-            filteredCards.map((item) => {
-              const isLiked = item.likes.includes(currentUser._id);
-              return (
-                <ItemCard
-                  loggedIn={loggedIn}
-                  key={item._id}
-                  item={item}
-                  onSelectCard={onSelectCard}
-                  handleLikeClick={handleLikeClick}
-                  isLiked={isLiked}
-                />
-              );
-            })
-          }
+          {filteredCards.map((item) => {
+            const isLiked = item.likes.includes(currentUser._id);
+            return (
+              <ItemCard
+                loggedIn={loggedIn}
+                key={item._id}
+                item={item}
+                onSelectCard={onSelectCard}
+                handleLikeClick={handleLikeClick}
+                isLiked={isLiked}
+              />
+            );
+          })}
         </div>
       </section>
     </main>

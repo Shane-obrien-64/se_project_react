@@ -26,14 +26,13 @@ const login = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then((res) => res.json())
+    .then(handleServerRes)
     .then((data) => {
       if (data.token) {
         localStorage.setItem("token", data.token);
         return data.token;
       }
-    })
-    .catch((err) => console.log(err));
+    });
 };
 
 const checkToken = (token) => {
@@ -43,11 +42,7 @@ const checkToken = (token) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .catch((err) => console.log(err));
+  }).then(handleServerRes);
 };
 
 const auth = {

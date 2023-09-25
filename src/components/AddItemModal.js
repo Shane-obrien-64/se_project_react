@@ -55,37 +55,44 @@ const AddItemModal = ({ handleCloseModal, handleAddItem, isOpen }) => {
       <div className="modal__weather-type">
         <span className="modal__label">Select weather type:</span>
         <div className="modal__radio-group">
-          <input
-            name="weather-type"
-            className="modal__radio"
-            type="radio"
-            id="hot"
-            value="hot"
-            onChange={handleClimateChange}
-          />
-          <label>Hot</label>
+          <label>
+            {" "}
+            <input
+              name="weather-type"
+              className="modal__radio"
+              type="radio"
+              id="hot"
+              value="hot"
+              onChange={handleClimateChange}
+            />
+            Hot
+          </label>
         </div>
         <div className="modal__radio-group">
-          <input
-            name="weather-type"
-            className="modal__radio"
-            type="radio"
-            id="warm"
-            value="warm"
-            onChange={handleClimateChange}
-          />
-          <label>Warm</label>
+          <label>
+            <input
+              name="weather-type"
+              className="modal__radio"
+              type="radio"
+              id="warm"
+              value="warm"
+              onChange={handleClimateChange}
+            />
+            Warm
+          </label>
         </div>
         <div className="modal__radio-group">
-          <input
-            name="weather-type"
-            className="modal__radio"
-            type="radio"
-            id="cold"
-            value="cold"
-            onChange={handleClimateChange}
-          />
-          <label>Cold</label>
+          <label>
+            <input
+              name="weather-type"
+              className="modal__radio"
+              type="radio"
+              id="cold"
+              value="cold"
+              onChange={handleClimateChange}
+            />
+            Cold
+          </label>
         </div>
       </div>
       <button className="modal__submit-btn" type="submit">
