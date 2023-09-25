@@ -21,12 +21,20 @@ const LoginModal = ({ handleCloseModal, handleLogin, handleSignUpModal }) => {
     e.preventDefault();
   };
 
+  const registerBtn = {
+    text: "or Register",
+    handler: handleSignUpModal,
+    className: "modal__register-btn",
+  };
+
   return (
     <ModalWithForm
       name={"Login"}
       title={"Login"}
       onClose={handleCloseModal}
       onSubmit={handleSubmit}
+      buttonText={"Next"}
+      additionalBtn={registerBtn}
     >
       <span>Email</span>
       <input
@@ -46,16 +54,6 @@ const LoginModal = ({ handleCloseModal, handleLogin, handleSignUpModal }) => {
         onChange={handlePasswordChange}
         value={password}
       />
-      <button className="modal__submit-btn" type="submit">
-        Next
-      </button>
-      <button
-        className="modal__register-btn"
-        onClick={handleSignUpModal}
-        type="button"
-      >
-        or Register
-      </button>
     </ModalWithForm>
   );
 };

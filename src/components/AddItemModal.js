@@ -30,6 +30,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItem, isOpen }) => {
       onClose={handleCloseModal}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      buttonText={"Add garment"}
     >
       <span className="modal__input-label">Name</span>
       <input
@@ -95,9 +96,6 @@ const AddItemModal = ({ handleCloseModal, handleAddItem, isOpen }) => {
           </label>
         </div>
       </div>
-      <button className="modal__submit-btn" type="submit">
-        Add garment
-      </button>
     </ModalWithForm>
   );
 };

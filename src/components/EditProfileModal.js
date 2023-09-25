@@ -25,6 +25,7 @@ const EditProfileModal = ({ handleCloseModal, handleEditProfile }) => {
       title={"Edit Profile"}
       onClose={handleCloseModal}
       onSubmit={handleSubmit}
+      buttonText={"Next"}
     >
       <span>Name</span>
       <input
@@ -44,9 +45,6 @@ const EditProfileModal = ({ handleCloseModal, handleEditProfile }) => {
         onChange={handleAvatarChange}
         value={avatar}
       />
-      <button className="modal__submit-btn" type="submit">
-        Next
-      </button>
     </ModalWithForm>
   );
 };

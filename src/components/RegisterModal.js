@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ModalWithForm from "./ModalWithForm";
-import { register } from "../utils/auth";
 import "../blocks/RegisterModal.css";
 
 const RegisterModal = ({
@@ -27,6 +26,11 @@ const RegisterModal = ({
   const handleAvatarChange = (e) => {
     setAvatar(e.target.value);
   };
+  const loginBtn = {
+    text: "or Log in",
+    handler: handleLoginModal,
+    className: "modal__login-btn",
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,6 +44,7 @@ const RegisterModal = ({
       buttonText={"Next"}
       onClose={handleCloseModal}
       onSubmit={handleSubmit}
+      additionalBtn={loginBtn}
     >
       <span>Email</span>
       <input
@@ -81,16 +86,6 @@ const RegisterModal = ({
         onChange={handleAvatarChange}
         value={avatar}
       />
-      <button className="modal__submit-btn" type="submit">
-        Next
-      </button>
-      <button
-        className="modal__login-btn"
-        onClick={handleLoginModal}
-        type="button"
-      >
-        or Log in
-      </button>
     </ModalWithForm>
   );
 };
