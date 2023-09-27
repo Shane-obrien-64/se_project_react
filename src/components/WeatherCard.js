@@ -17,11 +17,10 @@ const WeatherCard = ({ isDay, type, weatherTemp }) => {
           {weatherTemp} °{currentTemperatureUnit}
         </div>
         <img
-          preserveAspectRatio="xMinYMin meet"
           className="weather__img"
           src={imageSrc[0].url}
           alt={imageSrc[0].type + " skies"}
-        ></img>
+        />
       </div>
     </section>
   );
