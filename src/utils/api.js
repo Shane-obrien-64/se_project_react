@@ -1,4 +1,7 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://wtwr1.crabdance.com/"
+    : "http://localhost:3001";
 
 export const handleServerRes = (res) => {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);

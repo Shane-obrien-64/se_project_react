@@ -1,8 +1,11 @@
 import { handleServerRes } from "./api";
-const BASE_URL = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://wtwr1.crabdance.com/"
+    : "http://localhost:3001";
 
 const register = ({ email, password, name, avatar }) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -18,7 +21,7 @@ const register = ({ email, password, name, avatar }) => {
 };
 
 const login = (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -36,7 +39,7 @@ const login = (email, password) => {
 };
 
 const checkToken = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
