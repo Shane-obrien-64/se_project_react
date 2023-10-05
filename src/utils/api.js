@@ -19,7 +19,6 @@ const getItems = () => {
 
 const addItem = ({ name, weather, imageUrl }) => {
   const token = localStorage.getItem("token");
-  console.log();
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {

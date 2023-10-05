@@ -59,6 +59,7 @@ function App() {
   };
 
   const handleAddItem = (values) => {
+    console.log(values);
     api
       .addItem(values)
       .then((data) => {
@@ -157,7 +158,6 @@ function App() {
     api
       .getItems()
       .then((res) => {
-        console.log(res);
         setClothingItems(res);
       })
       .catch((err) => {
