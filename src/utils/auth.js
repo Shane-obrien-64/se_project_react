@@ -1,7 +1,7 @@
 import { handleServerRes } from "./api";
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "https://wtwr1.crabdance.com/"
+    ? "https://api.wtwr1.crabdance.com"
     : "http://localhost:3001";
 
 const register = ({ email, password, name, avatar }) => {

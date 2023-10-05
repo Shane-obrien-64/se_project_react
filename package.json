@@ -18,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && scp -r -i ~/.ssh/id_ed25519 ./build/* shane_g_obrien@wtwr1.crabdance.com:/home/shane_g_obrien/frontend"
   },
   "eslintConfig": {
     "extends": [
