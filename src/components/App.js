@@ -59,7 +59,6 @@ function App() {
   };
 
   const handleAddItem = (values) => {
-    console.log(values);
     api
       .addItem(values)
       .then((data) => {

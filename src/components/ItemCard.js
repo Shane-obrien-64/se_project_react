@@ -17,8 +17,6 @@ const ItemCard = ({
     isLiked ? "like-btn_liked" : "like-btn_default"
   }`;
 
-  // console.log(likeBtnClassName);
-
   return (
     <div className="card">
       <div className="card__container">
